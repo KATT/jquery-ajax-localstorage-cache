@@ -56,7 +56,7 @@
     cacheKey = options.cachePrefix + cacheKey;
 
     // isCacheValid is a function to validate cache
-    if ( !options.isCacheValid() ){
+    if ( !options.isCacheValid(options) ){
       localStorage.removeItem( cacheKey );
     }
     // if there's a TTL that's expired, flush this item
