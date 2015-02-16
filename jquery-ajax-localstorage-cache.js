@@ -4,6 +4,21 @@
 ;(function($) {
   var pluginName = "ajaxLocalstorageCache";
 
+
+  // Modernizr.localstorage, version 3 12/12/13
+  function checkLocalStorage() {
+    var mod = 'modernizr';
+    try {
+      localStorage.setItem(mod, mod);
+      localStorage.removeItem(mod);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+  var hasLocalStorage = checkLocalStorage();
+
+
   var ajaxLocalstorageCache = $[pluginName] = {};
   ajaxLocalstorageCache.defaults = {
     localCache: false,
@@ -16,22 +31,10 @@
 
   $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
 
-    // Modernizr.localstorage, version 3 12/12/13
-    function hasLocalStorage() {
-      var mod = 'modernizr';
-      try {
-        localStorage.setItem(mod, mod);
-        localStorage.removeItem(mod);
-        return true;
-      } catch(e) {
-        return false;
-      }
-    }
-
     options = $.extend({}, ajaxLocalstorageCache.defaults, options);
 
     // Cache it ?
-    if ( !hasLocalStorage() || !options.localCache ) return;
+    if ( !hasLocalStorage || !options.localCache ) return;
 
 
     var hourstl = options.cacheTTL,
