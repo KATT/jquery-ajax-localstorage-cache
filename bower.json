@@ -1,6 +1,6 @@
 {
   "name": "jquery-ajax-localstorage-cache",
   "main": "jquery-ajax-localstorage-cache.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/KATT/jquery-ajax-localstorage-cache"
 }
