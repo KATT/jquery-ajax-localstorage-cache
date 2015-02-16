@@ -27,6 +27,19 @@
     isResponseValid: function(){ return true },
     cachePrefix: 'ajaxcache_'
   };
+  ajaxLocalstorageCache.clear = function(cachePrefix) {
+    if (!hasLocalStorage) return;
+
+    cachePrefix = cachePrefix || ajaxLocalstorageCache.defaults.cachePrefix;
+
+    var keys = Object.keys(localStorage);
+    keys.forEach(function(key){
+      if (key.indexOf(cachePrefix) === 0) {
+        localStorage.removeItem(key);
+        console.log('remove', key)
+      }
+    });
+  }
 
 
   $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
