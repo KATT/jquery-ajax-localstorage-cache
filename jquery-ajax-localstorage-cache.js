@@ -28,7 +28,7 @@
       }
     }
 
-    options = $.extend(ajaxLocalstorageCache.defaults, options);
+    options = $.extend({}, ajaxLocalstorageCache.defaults, options);
 
     // Cache it ?
     if ( !hasLocalStorage() || !options.localCache ) return;
