@@ -2,6 +2,18 @@
 // dependent on Modernizr's localStorage test
 
 ;(function($) {
+  var pluginName = "ajaxLocalstorageCache";
+
+  var ajaxLocalstorageCache = $[pluginName] = {};
+  ajaxLocalstorageCache.defaults = {
+    localCache: false,
+    cacheTTL: 5,
+    isCacheValid: function(){ return true },
+    isResponseValid: function(){ return true },
+    cachePrefix: 'ajaxcache_'
+  };
+
+
   $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
 
     // Modernizr.localstorage, version 3 12/12/13
@@ -16,13 +28,7 @@
       }
     }
 
-    options = $.extend({
-      localCache: false,
-      cacheTTL: 5,
-      isCacheValid: function(){ return true },
-      isResponseValid: function(){ return true },
-      cachePrefix: 'ajaxcache_'
-    }, options);
+    options = $.extend(ajaxLocalstorageCache.defaults, options);
 
     // Cache it ?
     if ( !hasLocalStorage() || !options.localCache ) return;
