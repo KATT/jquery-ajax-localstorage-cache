@@ -5,25 +5,21 @@ jquery-ajax-localstorage-cache is a plugin built for jQuery (>1.5.1) and localSt
 
 ## Parameters
 ```javascript
-	$.ajax({
-		url          : '/post',
-		localCache   : true,        // required to use
-
-		cacheTTL     : 1,           // in hours. Optional
-		cachePrefix  : 'ajaxcache_', // optional
-		cacheKey     : 'post',      // optional
-		isCacheValid : function(){  // optional
-			return true;
-		},
-		isResponseValid: function( data ){ // optional
-			return true;
-		},
-
-		success: function(reply) {
-			// i can play with my reply !
-		}
-	});
+$.ajaxLocalstorageCache.defaults = {
+  localCache: false,
+  cacheTTL: 5,
+  isCacheValid: function(/* requestOptions */) {
+    return true
+  },
+  isResponseValid: function(/* responseData */) {
+    return true
+  },
+  cachePrefix: 'ajaxcache_'
+};
 ```
+
+You can either send the parameters when doing `$.ajax()` or overriding them globally, e.g. `$.ajaxLocalstorageCache.defaults.localCache = true;`
+
 On your AJAX request you get 4 new parameters :
 
 * localCache

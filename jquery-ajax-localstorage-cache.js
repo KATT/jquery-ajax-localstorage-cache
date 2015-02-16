@@ -23,8 +23,12 @@
   ajaxLocalstorageCache.defaults = {
     localCache: false,
     cacheTTL: 5,
-    isCacheValid: function(){ return true },
-    isResponseValid: function(){ return true },
+    isCacheValid: function(/* requestOptions */) {
+      return true
+    },
+    isResponseValid: function(/* responseData */) {
+      return true
+    },
     cachePrefix: 'ajaxcache_'
   };
   ajaxLocalstorageCache.clear = function(cachePrefix) {
